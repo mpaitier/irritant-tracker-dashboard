@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { NgChartsModule } from 'ng2-charts';
+// import { NgChartsModule } from 'ng2-charts'; // Si vous ne l'utilisez plus, gardez-le commenté
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +22,6 @@ import { RecentChangesComponent } from './components/recent-changes/recent-chang
     AppRoutingModule,
     BrowserAnimationsModule,
     DragDropModule,
-    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,1 +1,22 @@
-<p>stats works!</p>
+<div style="padding: 24px;">
+  <h2>Statistiques des Irritants</h2>
+
+  <div class="toggle-container">
+    <input type="radio" id="lieu" name="axe" value="lieu" [checked]="axeActuel === 'lieu'" (change)="changerAxe($event)">
+    <label for="lieu" class="toggle-box">Lieu</label>
+
+    <input type="radio" id="type" name="axe" value="type" [checked]="axeActuel === 'type'" (change)="changerAxe($event)">
+    <label for="type" class="toggle-box">Type</label>
+  </div>
+
+  @if (chargement) {
+    <div style="text-align: center; padding: 48px;">Chargement des données...</div>
+  }
+  @if (erreur) {
+    <div style="color: red; padding: 16px;">Erreur de connexion à Firebase.</div>
+  }
+
+  <div [style.display]="chargement ? 'none' : 'block'" style="position: relative; height: 400px; margin-top: 20px;">
+    <canvas #barChart></canvas>
+  </div>
+</div>

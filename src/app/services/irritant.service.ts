@@ -6,7 +6,7 @@ import {
   getFirestore, collection, doc, updateDoc,
   orderBy, query, onSnapshot
 } from 'firebase/firestore';
-import { environment } from '../../environements/environements';
+import { environment } from '../../environements/environement';
 
 const app = initializeApp(environment.firebase);
 const db = getFirestore(app);
@@ -14,6 +14,7 @@ const db = getFirestore(app);
 @Injectable({ providedIn: 'root' })
 export class IrritantService {
 
+  // Récupère tous les irritants en temps réel
   getAll(): Observable<Irritant[]> {
     return new Observable((observer) => {
       const ref = collection(db, 'irritants');
@@ -29,7 +30,6 @@ export class IrritantService {
         observer.error(error);
       });
 
-      // Nettoyage quand l'Observable est détruit
       return () => unsubscribe();
     });
   }

@@ -1,0 +1,78 @@
+<div class="referentiel-container">
+  <h2>Gestion des référentiels</h2>
+
+  <div class="sections">
+    <div class="section" *ngFor="let section of sections">
+      <h3>{{ section.titre }}</h3>
+
+      <!-- Loader -->
+      <div *ngIf="section.chargement" class="chargement">
+        Chargement...
+      </div>
+
+      <!-- Liste des items -->
+      <ul *ngIf="!section.chargement" class="liste">
+        <li *ngFor="let item of section.items" class="item">
+
+          <!-- Mode lecture -->
+          <ng-container *ngIf="section.itemEnEdition !== item.id">
+            <span class="nom">{{ item.Nom }}</span>
+            <div class="actions">
+              <button class="btn-edit" (click)="activerEdition(section, item)">
+                ✏️ Renommer
+              </button>
+              <button class="btn-delete" (click)="demanderSuppression(section.collection, item)">
+                🗑️ Supprimer
+              </button>
+            </div>
+          </ng-container>
+
+          <!-- Mode édition -->
+          <ng-container *ngIf="section.itemEnEdition === item.id">
+            <input
+              class="input-edit"
+              [(ngModel)]="section.nomEdition"
+              (keyup.enter)="sauvegarderEdition(section)"
+              (keyup.escape)="annulerEdition(section)"
+              autofocus />
+            <div class="actions">
+              <button class="btn-save" (click)="sauvegarderEdition(section)">
+                ✅ Sauvegarder
+              </button>
+              <button class="btn-cancel" (click)="annulerEdition(section)">
+                ❌ Annuler
+              </button>
+            </div>
+          </ng-container>
+
+        </li>
+      </ul>
+
+      <!-- Formulaire d'ajout -->
+      <div *ngIf="!section.chargement" class="ajout">
+        <input
+          class="input-ajout"
+          [(ngModel)]="section.nouveauNom"
+          placeholder="Nouveau nom..."
+          (keyup.enter)="ajouter(section)" />
+        <button class="btn-add" (click)="ajouter(section)">
+          + Ajouter
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Popup de confirmation de suppression -->
+<div class="overlay" *ngIf="popupSuppression.visible">
+  <div class="popup">
+    <h4>Confirmer la suppression</h4>
+    <p>Êtes-vous sûr de vouloir supprimer <strong>{{ popupSuppression.nom }}</strong> ?</p>
+    <p class="popup-warning">⚠️ Cette action est irréversible.</p>
+    <div class="popup-actions">
+      <button class="btn-cancel" (click)="annulerSuppression()">Annuler</button>
+      <button class="btn-delete" (click)="confirmerSuppression()">Supprimer</button>
+    </div>
+  </div>
+</div>

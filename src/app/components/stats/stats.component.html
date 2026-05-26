@@ -2,10 +2,14 @@
   <h2>Statistiques des Irritants</h2>
 
   <div class="toggle-container">
-    <input type="radio" id="lieu" name="axe" value="lieu" [checked]="axeActuel === 'lieu'" (change)="changerAxe($event)">
+    <input type="radio" id="lieu" name="axe" value="lieu" 
+          [checked]="axeActuel === 'lieu'" 
+          (change)="changerAxe($event)">
     <label for="lieu" class="toggle-box">Lieu</label>
 
-    <input type="radio" id="type" name="axe" value="type" [checked]="axeActuel === 'type'" (change)="changerAxe($event)">
+    <input type="radio" id="type" name="axe" value="type" 
+          [checked]="axeActuel === 'type'" 
+          (change)="changerAxe($event)">
     <label for="type" class="toggle-box">Type</label>
   </div>
 

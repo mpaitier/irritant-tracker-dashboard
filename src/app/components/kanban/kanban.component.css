@@ -1,0 +1,120 @@
+.kanban-board {
+  display: flex;
+  gap: 12px;
+  height: 100%;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.kanban-column {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: #fff;
+  border-top: 4px solid #ccc;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.column-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.column-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 20px;
+  min-width: 22px;
+  text-align: center;
+}
+
+.column-body {
+  flex: 1;
+  padding: 8px;
+  overflow-y: auto;
+  min-height: 100px;
+}
+
+.ticket-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  cursor: grab;
+  transition: box-shadow 0.2s;
+}
+
+.ticket-card:hover {
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.ticket-card.cdk-drag-preview {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transform: rotate(2deg);
+}
+
+.ticket-card.cdk-drag-placeholder {
+  opacity: 0.3;
+  background: #ddd;
+}
+
+.ticket-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.ticket-priorite {
+  font-size: 14px;
+}
+
+.ticket-type {
+  font-size: 10px;
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 10px;
+  color: #666;
+}
+
+.ticket-titre {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+
+.ticket-lieu,
+.ticket-auteur {
+  font-size: 11px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.empty-column {
+  text-align: center;
+  color: #bbb;
+  font-size: 12px;
+  padding: 20px 8px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+.cdk-drop-list-dragging .ticket-card:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

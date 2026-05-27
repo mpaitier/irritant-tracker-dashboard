@@ -16,15 +16,12 @@
         [cdkDropListData]="colonne.tickets"
         [cdkDropListConnectedTo]="colonneIds"
         (cdkDropListDropped)="drop($event, colonne.id)"
-        class="ticket-card"
-        *ngFor="let ticket of colonne.tickets"
-        cdkDrag
-        (click)="ouvrirTicket(ticket)"
       >
         <div
           class="ticket-card"
           *ngFor="let ticket of colonne.tickets"
           cdkDrag
+          (click)="ouvrirTicket(ticket)"
         >
           <div class="ticket-header">
             <span class="ticket-priorite" [style.background]="prioriteCouleur(ticket.priorite)">

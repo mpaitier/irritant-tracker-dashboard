@@ -15,6 +15,7 @@ interface IrritantAvecMessages extends Irritant {
 export class RecentChangesComponent implements OnInit {
   recentIrritants: IrritantAvecMessages[] = [];
   nouveauMessage: { [id: string]: string } = {};
+  ticketSelectionne: Irritant | null = null;
 
   constructor(private irritantService: IrritantService) {}
 
@@ -31,14 +32,14 @@ export class RecentChangesComponent implements OnInit {
             (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
           );
 
-          // Si le dernier message est du support → ticket traité, on n'affiche pas
+          // Si le dernier message est du support alors le ticket est traité, on n'affiche pas
           if (sorted[0].role === 'support') {
             const idx = this.recentIrritants.findIndex(i => i.id === irritant.id);
             if (idx !== -1) this.recentIrritants.splice(idx, 1);
             return;
           }
 
-          // Sinon le dernier message est de l'employé → on affiche
+          // Sinon le dernier message est de l'employé alors on affiche le ticket
           const dernierMessage = sorted[0];
           const item: IrritantAvecMessages = { ...irritant, dernierMessage };
 
@@ -55,6 +56,18 @@ export class RecentChangesComponent implements OnInit {
         });
       });
     });
+  }
+
+  ouvrirTicket(ticket: Irritant): void {
+    this.ticketSelectionne = ticket;
+  }
+
+  fermerTicket(): void {
+    this.ticketSelectionne = null;
+  }
+
+  onStatutChange(ticket: Irritant, nouveauStatut: string): void {
+    ticket.statut = nouveauStatut;
   }
 
   formaterDate(date: string): string {

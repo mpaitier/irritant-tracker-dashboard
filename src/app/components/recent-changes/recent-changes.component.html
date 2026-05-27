@@ -2,7 +2,11 @@
   <h3 class="card-title">Derniers changements</h3>
 
   <div class="change-list">
-    <div class="change-item" *ngFor="let item of recentIrritants">
+    <div
+      class="change-item"
+      *ngFor="let item of recentIrritants"
+      (click)="ouvrirTicket(item)"  
+    >
 
       <div class="change-top">
         <div class="change-author">
@@ -31,7 +35,7 @@
       </div>
 
       <!-- Répondre -->
-      <div class="change-reply">
+      <div class="change-reply" (click)="$event.stopPropagation()">
         <input
           type="text"
           [(ngModel)]="nouveauMessage[item.id!]"
@@ -49,3 +53,10 @@
     </div>
   </div>
 </div>
+
+<app-ticket-detail
+  *ngIf="ticketSelectionne"
+  [ticket]="ticketSelectionne"
+  (fermer)="fermerTicket()"
+  (statutChange)="onStatutChange(ticketSelectionne, $event)">
+</app-ticket-detail>

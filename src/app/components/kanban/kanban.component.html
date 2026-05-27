@@ -1,8 +1,5 @@
 <div class="kanban-board">
-  <div
-    class="kanban-column"
-    *ngFor="let colonne of colonnes"
-  >
+  <div class="kanban-column" *ngFor="let colonne of colonnes">
     <div class="column-header" [style.border-top-color]="colonne.couleur">
       <span class="column-title">{{ colonne.label }}</span>
       <span class="column-count" [style.background]="colonne.couleur">
@@ -22,6 +19,7 @@
         class="ticket-card"
         *ngFor="let ticket of colonne.tickets"
         cdkDrag
+        (click)="ouvrirTicket(ticket)"
       >
         <div class="ticket-header">
           <span class="ticket-priorite">{{ prioriteLabel(ticket.priorite) }}</span>
@@ -38,3 +36,10 @@
     </div>
   </div>
 </div>
+
+<app-ticket-detail
+  *ngIf="ticketSelectionne"
+  [ticket]="ticketSelectionne"
+  (fermer)="fermerTicket()"
+  (statutChange)="onStatutChange(ticketSelectionne, $event)">
+</app-ticket-detail>

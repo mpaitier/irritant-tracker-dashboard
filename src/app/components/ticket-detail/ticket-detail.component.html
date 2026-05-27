@@ -1,0 +1,124 @@
+<div class="overlay" (click)="onOverlayClick($event)">
+  <div class="popup">
+
+    <!-- Header -->
+    <div class="popup-header">
+      <div class="header-left">
+        <span class="ticket-id">#{{ ticket.id?.slice(0, 6) }}</span>
+        <h2 class="ticket-titre">{{ ticket.titre }}</h2>
+      </div>
+      <button class="btn-fermer" (click)="fermerPopup()">✕</button>
+    </div>
+
+    <div class="popup-body">
+
+      <!-- Colonne gauche : infos + chat -->
+      <div class="colonne-principale">
+
+        <!-- Infos -->
+        <div class="section-infos">
+          <div class="info-ligne">
+            <span class="info-label">📍 Lieu</span>
+            <span class="info-valeur">{{ ticket.lieu }}</span>
+          </div>
+          <div class="info-ligne">
+            <span class="info-label">🏷️ Type</span>
+            <span class="info-valeur">{{ ticket.type }}</span>
+          </div>
+          <div class="info-ligne">
+            <span class="info-label">👤 Signalé par</span>
+            <span class="info-valeur">{{ ticket.nom }}</span>
+          </div>
+          <div class="info-ligne">
+            <span class="info-label">📅 Date</span>
+            <span class="info-valeur">{{ formaterDate(ticket.date) }}</span>
+          </div>
+          <div class="info-ligne">
+            <span class="info-label">🚩 Priorité</span>
+            <span class="info-valeur priorite"
+                  [style.color]="couleurPriorite(ticket.priorite)">
+              {{ ticket.priorite }}/10
+            </span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="section-description">
+          <h4>Description</h4>
+          <p>{{ ticket.description }}</p>
+        </div>
+
+        <!-- Photos -->
+        <div class="section-photos" *ngIf="ticket.photosUrls && ticket.photosUrls.length > 0">
+          <h4>Photos ({{ ticket.photosUrls.length }})</h4>
+          <div class="grille-photos">
+            <img
+              *ngFor="let url of ticket.photosUrls"
+              [src]="url"
+              class="photo"
+              (click)="ouvrirPhoto(url)" />
+          </div>
+        </div>
+
+        <!-- Chat -->
+        <div class="section-chat">
+          <h4>💬 Échange avec l'employé</h4>
+
+          <div class="messages" #messagesContainer>
+            <div *ngIf="messages.length === 0" class="no-messages">
+              Aucun message pour l'instant.
+            </div>
+
+            <div
+              *ngFor="let msg of messages"
+              class="bulle"
+              [class.bulle-support]="msg.role === 'support'"
+              [class.bulle-employe]="msg.role === 'employe'">
+
+              <span class="bulle-auteur" *ngIf="msg.role === 'employe'">
+                {{ msg.auteur }}
+              </span>
+
+              <p class="bulle-texte">{{ msg.texte }}</p>
+              <span class="bulle-heure">{{ formaterDate(msg.date) }}</span>
+            </div>
+          </div>
+
+          <!-- Champ d'envoi -->
+          <div class="chat-input">
+            <input
+              [(ngModel)]="nouveauMessage"
+              placeholder="Répondre à l'employé..."
+              (keyup.enter)="envoyerMessage()"
+              [disabled]="envoi" />
+            <button
+              (click)="envoyerMessage()"
+              [disabled]="envoi || !nouveauMessage.trim()"
+              class="btn-envoyer">
+              {{ envoi ? '...' : '➤' }}
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Colonne droite : statut -->
+      <div class="colonne-statut">
+        <h4>Statut</h4>
+        <div class="statuts-liste">
+          <button
+            *ngFor="let s of statuts"
+            class="btn-statut"
+            [class.actif]="ticket.statut === s.id"
+            [style.border-color]="s.couleur"
+            [style.background]="ticket.statut === s.id ? s.couleur : 'transparent'"
+            [style.color]="ticket.statut === s.id ? 'white' : s.couleur"
+            (click)="changerStatut(s.id)">
+            {{ s.id }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

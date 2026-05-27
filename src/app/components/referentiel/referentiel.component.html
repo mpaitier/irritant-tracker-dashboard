@@ -1,70 +1,66 @@
 <div class="referentiel-container">
-  <h2>Gestion des référentiels</h2>
+  <div class="referentiel-header">
+    <h2>Référentiels</h2>
 
-  <div class="sections">
-    <div class="section" *ngFor="let section of sections">
-      <h3>{{ section.titre }}</h3>
+    <!-- Toggle Lieux / Types -->
+    <div class="toggle-container">
+      <input type="radio" id="lieux" name="section" value="0"
+        [checked]="sectionActive === 0"
+        (change)="changerSection(0)">
+      <label for="lieux" class="toggle-box">Lieux</label>
 
-      <!-- Loader -->
-      <div *ngIf="section.chargement" class="chargement">
-        Chargement...
-      </div>
+      <input type="radio" id="types" name="section" value="1"
+        [checked]="sectionActive === 1"
+        (change)="changerSection(1)">
+      <label for="types" class="toggle-box">Types</label>
+    </div>
+  </div>
 
-      <!-- Liste des items -->
-      <ul *ngIf="!section.chargement" class="liste">
-        <li *ngFor="let item of section.items" class="item">
+  <!-- Section active uniquement -->
+  <div class="section">
+    <div *ngIf="sectionAffichee.chargement" class="chargement">
+      Chargement...
+    </div>
 
-          <!-- Mode lecture -->
-          <ng-container *ngIf="section.itemEnEdition !== item.id">
-            <span class="nom">{{ item.Nom }}</span>
-            <div class="actions">
-              <button class="btn-edit" (click)="activerEdition(section, item)">
-                ✏️ Renommer
-              </button>
-              <button class="btn-delete" (click)="demanderSuppression(section.collection, item)">
-                🗑️ Supprimer
-              </button>
-            </div>
-          </ng-container>
+    <ul *ngIf="!sectionAffichee.chargement" class="liste">
+      <li *ngFor="let item of sectionAffichee.items" class="item">
 
-          <!-- Mode édition -->
-          <ng-container *ngIf="section.itemEnEdition === item.id">
-            <input
-              class="input-edit"
-              [(ngModel)]="section.nomEdition"
-              (keyup.enter)="sauvegarderEdition(section)"
-              (keyup.escape)="annulerEdition(section)"
-              autofocus />
-            <div class="actions">
-              <button class="btn-save" (click)="sauvegarderEdition(section)">
-                ✅ Sauvegarder
-              </button>
-              <button class="btn-cancel" (click)="annulerEdition(section)">
-                ❌ Annuler
-              </button>
-            </div>
-          </ng-container>
+        <ng-container *ngIf="sectionAffichee.itemEnEdition !== item.id">
+          <span class="nom">{{ item.Nom }}</span>
+          <div class="actions">
+            <button class="btn-edit" (click)="activerEdition(sectionAffichee, item)">Renommer</button>
+            <button class="btn-delete" (click)="demanderSuppression(sectionAffichee.collection, item)">Supprimer</button>
+          </div>
+        </ng-container>
 
-        </li>
-      </ul>
+        <ng-container *ngIf="sectionAffichee.itemEnEdition === item.id">
+          <input
+            class="input-edit"
+            [(ngModel)]="sectionAffichee.nomEdition"
+            (keyup.enter)="sauvegarderEdition(sectionAffichee)"
+            (keyup.escape)="annulerEdition(sectionAffichee)"
+            autofocus />
+          <div class="actions">
+            <button class="btn-save" (click)="sauvegarderEdition(sectionAffichee)">✅</button>
+            <button class="btn-cancel" (click)="annulerEdition(sectionAffichee)">❌</button>
+          </div>
+        </ng-container>
 
-      <!-- Formulaire d'ajout -->
-      <div *ngIf="!section.chargement" class="ajout">
-        <input
-          class="input-ajout"
-          [(ngModel)]="section.nouveauNom"
-          placeholder="Nouveau nom..."
-          (keyup.enter)="ajouter(section)" />
-        <button class="btn-add" (click)="ajouter(section)">
-          + Ajouter
-        </button>
-      </div>
+      </li>
+    </ul>
 
+    <div *ngIf="!sectionAffichee.chargement" class="ajout">
+      <input
+        class="input-ajout"
+        [(ngModel)]="sectionAffichee.nouveauNom"
+        placeholder="Nouveau nom..."
+        (keyup.enter)="ajouter(sectionAffichee)" />
+      <button class="btn-add" (click)="ajouter(sectionAffichee)">+ Ajouter</button>
     </div>
   </div>
 </div>
 
-<!-- Popup de confirmation de suppression -->
+<!-- Popup suppression -->
 <div class="overlay" *ngIf="popupSuppression.visible">
   <div class="popup">
     <h4>Confirmer la suppression</h4>

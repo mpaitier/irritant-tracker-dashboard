@@ -1,20 +1,33 @@
 <div class="admin-layout">
   <header class="admin-header">
     <div class="header-brand">
-      <span class="header-icon">⚠️</span>
+      <img src="icon/IrritantTracker.png" alt="Logo" class="header-logo" />
       <span class="header-title">IrritantTracker</span>
     </div>
-    <span class="header-badge">Admin</span>
+    <div class="header-right">
+      <span class="header-badge">Admin</span>
+    </div>
   </header>
 
   <main class="admin-main">
-    <div class="left-panel">
-      <app-kanban></app-kanban>
+
+    <div class="row">
+      <div class="col-2tiers">
+        <app-kanban></app-kanban>
+      </div>
+      <div class="col-1tiers">
+        <app-recent-changes></app-recent-changes>
+      </div>
     </div>
-    <div class="right-panel">
-      <app-recent-changes></app-recent-changes>
-      <app-stats></app-stats>
-      <app-referentiel></app-referentiel>
+
+    <div class="row">
+      <div class="col-moitie">
+        <app-stats></app-stats>
+      </div>
+      <div class="col-moitie">
+        <app-referentiel></app-referentiel>
+      </div>
     </div>
+
   </main>
 </div>

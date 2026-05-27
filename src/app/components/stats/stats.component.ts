@@ -14,7 +14,7 @@ const COULEURS_STATUT: Record<string, string> = {
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
-  // standalone: true et imports: [...] supprimés
+  styleUrls: ['./stats.component.css']
 })
 export class StatsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('barChart') barChartRef!: ElementRef<HTMLCanvasElement>;
@@ -80,9 +80,29 @@ export class StatsComponent implements OnInit, AfterViewInit, OnDestroy {
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              font: { size: 10 },
+              boxWidth: 12,
+              padding: 8,
+            }
+          }
+        },
         scales: {
           x: { stacked: true },
-          y: { stacked: true }
+          y: {
+            stacked: true,
+            ticks: {
+              font: { size: 10 },
+              callback: function(value, index, ticks) {
+                const label = this.getLabelForValue(index);
+                // Tronque à 15 caractères
+                return label.length > 15 ? label.substring(0, 15) + '…' : label;
+              }
+            }
+          }
         }
       }
     });

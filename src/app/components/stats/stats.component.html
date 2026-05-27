@@ -1,26 +1,28 @@
-<div style="padding: 24px;">
-  <h2>Statistiques des Irritants</h2>
+<div class="stats-container">
+  <div class="stats-header">
+    <h2 class="stats-titre">Statistiques</h2>
 
-  <div class="toggle-container">
-    <input type="radio" id="lieu" name="axe" value="lieu" 
-          [checked]="axeActuel === 'lieu'" 
-          (change)="changerAxe($event)">
-    <label for="lieu" class="toggle-box">Lieu</label>
+    <div class="toggle-container">
+      <input type="radio" id="stat-lieu" name="stat-axe" value="lieu"
+            [checked]="axeActuel === 'lieu'"
+            (change)="changerAxe($event)">
+      <label for="stat-lieu" class="toggle-box">Lieu</label>
 
-    <input type="radio" id="type" name="axe" value="type" 
-          [checked]="axeActuel === 'type'" 
-          (change)="changerAxe($event)">
-    <label for="type" class="toggle-box">Type</label>
+      <input type="radio" id="stat-type" name="stat-axe" value="type"
+            [checked]="axeActuel === 'type'"
+            (change)="changerAxe($event)">
+      <label for="stat-type" class="toggle-box">Type</label>
+    </div>
   </div>
 
   @if (chargement) {
-    <div style="text-align: center; padding: 48px;">Chargement des données...</div>
+    <div class="stats-chargement">Chargement...</div>
   }
   @if (erreur) {
-    <div style="color: red; padding: 16px;">Erreur de connexion à Firebase.</div>
+    <div class="stats-erreur">Erreur de connexion à Firebase.</div>
   }
 
-  <div [style.display]="chargement ? 'none' : 'block'" style="position: relative; height: 400px; margin-top: 20px;">
+  <div class="stats-chart" [style.display]="chargement ? 'none' : 'block'">
     <canvas #barChart></canvas>
   </div>
 </div>

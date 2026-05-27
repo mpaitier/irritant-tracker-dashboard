@@ -125,4 +125,15 @@ export class ReferentielComponent implements OnInit, OnDestroy {
   annulerSuppression(): void {
     this.popupSuppression.visible = false;
   }
+
+  // Choisir entre le lieu (0) ou le type (1)  
+  sectionActive = 0;
+
+  changerSection(index: number): void {
+    this.sectionActive = index;
+  }
+
+  get sectionAffichee(): Section {
+    return this.sections[this.sectionActive];
+  }
 }

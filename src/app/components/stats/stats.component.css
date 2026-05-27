@@ -1,5 +1,44 @@
+.stats-container {
+  padding: 16px;
+}
+
+.stats-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.stats-titre {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #1a1a2e;
+}
+
+.stats-chargement {
+  text-align: center;
+  padding: 24px;
+  font-size: 13px;
+  color: #999;
+}
+
+.stats-erreur {
+  color: red;
+  padding: 12px;
+  font-size: 13px;
+}
+
+.stats-chart {
+  position: relative;
+  height: 220px;
+  margin-top: 12px;
+}
+
 .toggle-container {
-  display: inline-flex; /* S'adapte à la largeur du contenu */
+  display: inline-flex;
   background-color: #e0e0e0;
   border-radius: 8px;
   padding: 4px;
@@ -12,22 +51,21 @@
 }
 
 .toggle-box {
-  padding: 8px 24px;
+  padding: 6px 16px;
   cursor: pointer;
   border-radius: 6px;
   font-weight: 600;
-  color: #757575; /* Couleur par défaut (non sélectionné) */
+  font-size: 12px;
+  color: #757575;
   transition: all 0.3s ease;
   user-select: none;
   background-color: transparent;
 }
 
-/* État survol */
-.toggle-box:hover:not(.checked) {
+.toggle-box:hover {
   background-color: rgba(0,0,0,0.05);
 }
 
-/* État sélectionné : Violet */
 .toggle-container input[type="radio"]:checked + .toggle-box {
   background-color: #673ab7;
   color: white;

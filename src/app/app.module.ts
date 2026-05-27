@@ -23,6 +23,7 @@ import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.
     TicketDetailComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     CommonModule,
     FormsModule,

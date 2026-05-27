@@ -1,1 +1,51 @@
-<p>recent-changes works!</p>
+<div class="card">
+  <h3 class="card-title">Derniers changements</h3>
+
+  <div class="change-list">
+    <div class="change-item" *ngFor="let item of recentIrritants">
+
+      <div class="change-top">
+        <div class="change-author">
+          <span class="author-avatar">{{ item.nom.charAt(0).toUpperCase() }}</span>
+          <span class="author-name">{{ item.nom }}</span>
+        </div>
+        <span class="change-badge" [style.background]="couleurStatut(item.statut)">
+          {{ item.statut }}
+        </span>
+      </div>
+
+      <div class="change-titre">{{ item.titre }}</div>
+      <div class="change-lieu">📍 {{ item.lieu }} · {{ item.type }}</div>
+
+      <!-- Dernier message employé -->
+      <div class="change-message" *ngIf="item.dernierMessage">
+        <div class="message-header">
+          <span class="message-role" [style.background]="couleurRole(item.dernierMessage.role)">
+            👤 Employé
+          </span>
+          <span class="message-date">{{ formaterDate(item.dernierMessage.date) }}</span>
+        </div>
+        <div class="message-texte">
+          "{{ item.dernierMessage.texte | slice:0:80 }}{{ item.dernierMessage.texte.length > 80 ? '...' : '' }}"
+        </div>
+      </div>
+
+      <!-- Répondre -->
+      <div class="change-reply">
+        <input
+          type="text"
+          [(ngModel)]="nouveauMessage[item.id!]"
+          placeholder="Répondre à l'employé..."
+          (keyup.enter)="envoyer(item.id!)"
+        />
+        <button (click)="envoyer(item.id!)">➤</button>
+      </div>
+
+    </div>
+
+    <div class="empty" *ngIf="recentIrritants.length === 0">
+      <span>📭</span>
+      <p>Aucun message récent</p>
+    </div>
+  </div>
+</div>

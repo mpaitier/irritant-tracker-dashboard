@@ -3,6 +3,6 @@ export interface Message {
   texte: string;
   auteur: string;
   uidAuteur: string;
-  role: string; // 'employe' ou 'support'
+  role: string;
   date: string;
 }

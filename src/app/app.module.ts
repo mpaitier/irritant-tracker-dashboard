@@ -11,6 +11,7 @@ import { KanbanComponent } from './components/kanban/kanban.component';
 import { StatsComponent } from './components/stats/stats.component';
 import { RecentChangesComponent } from './components/recent-changes/recent-changes.component';
 import { ReferentielComponent } from './components/referentiel/referentiel.component';
+import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ReferentielComponent } from './components/referentiel/referentiel.compo
     StatsComponent,
     RecentChangesComponent,
     ReferentielComponent,
+    TicketDetailComponent,
   ],
   imports: [
     FormsModule,

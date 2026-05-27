@@ -7,7 +7,7 @@ import {
   getFirestore, collection, doc, updateDoc,
   orderBy, query, onSnapshot, addDoc
 } from 'firebase/firestore';
-import { environment } from '../../environements/environements';
+import { environment } from '../../environements/environement';
 
 const app = initializeApp(environment.firebase);
 const db = getFirestore(app);

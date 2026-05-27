@@ -18,24 +18,23 @@ export class KanbanComponent implements OnInit {
     { id: 'Fini', label: 'Fini', couleur: '#66BB6A', tickets: [] as Irritant[] },
   ];
 
+  // Ticket sélectionné pour la popup
+  ticketSelectionne: Irritant | null = null;
+
   get colonneIds(): string[] {
-    return this.colonnes.map((c) => c.id);
+    return this.colonnes.map(c => c.id);
   }
 
   constructor(private irritantService: IrritantService) {}
 
   ngOnInit(): void {
-    this.irritantService.getAll().subscribe((irritants) => {
-      // Vide toutes les colonnes
-      this.colonnes.forEach((c) => (c.tickets = []));
-
-      // Distribue les tickets dans les bonnes colonnes
-      irritants.forEach((irritant) => {
-        const colonne = this.colonnes.find((c) => c.id === irritant.statut);
+    this.irritantService.getAll().subscribe(irritants => {
+      this.colonnes.forEach(c => c.tickets = []);
+      irritants.forEach(irritant => {
+        const colonne = this.colonnes.find(c => c.id === irritant.statut);
         if (colonne) {
           colonne.tickets.push(irritant);
         } else {
-          // Statut inconnu → Ouvert par défaut
           this.colonnes[1].tickets.push(irritant);
         }
       });
@@ -52,8 +51,6 @@ export class KanbanComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-
-      // Met à jour le statut dans Firestore
       const ticket = event.container.data[event.currentIndex];
       if (ticket.id) {
         this.irritantService.updateStatut(ticket.id, nouvelleColonne);
@@ -67,5 +64,20 @@ export class KanbanComponent implements OnInit {
     if (p <= 3) return '#66BB6A';
     if (p <= 6) return '#FFA726';
     return '#EF5350';
+  }
+
+  // Ouvre la popup
+  ouvrirTicket(ticket: Irritant): void {
+    this.ticketSelectionne = ticket;
+  }
+
+  // Ferme la popup
+  fermerTicket(): void {
+    this.ticketSelectionne = null;
+  }
+
+  // Met à jour le statut depuis la popup
+  onStatutChange(ticket: Irritant, nouveauStatut: string): void {
+    ticket.statut = nouveauStatut;
   }
 }

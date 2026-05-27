@@ -21,6 +21,7 @@ import { ReferentielComponent } from './components/referentiel/referentiel.compo
     ReferentielComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     CommonModule,
     FormsModule,

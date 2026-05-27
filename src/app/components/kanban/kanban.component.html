@@ -1,40 +1,45 @@
-<div class="kanban-board">
-  <div
-    class="kanban-column"
-    *ngFor="let colonne of colonnes"
-  >
-    <div class="column-header" [style.border-top-color]="colonne.couleur">
-      <span class="column-title">{{ colonne.label }}</span>
-      <span class="column-count" [style.background]="colonne.couleur">
-        {{ colonne.tickets.length }}
-      </span>
-    </div>
+<div class="kanban-wrapper">
+  <div class="kanban-board">
+    <div class="kanban-column" *ngFor="let colonne of colonnes">
+      
+      <div class="column-header" [style.border-top-color]="colonne.couleur">
+        <span class="column-title">{{ colonne.label }}</span>
+        <span class="column-count" [style.background]="colonne.couleur">
+          {{ colonne.tickets.length }}
+        </span>
+      </div>
 
-    <div
-      class="column-body"
-      cdkDropList
-      [id]="colonne.id"
-      [cdkDropListData]="colonne.tickets"
-      [cdkDropListConnectedTo]="colonneIds"
-      (cdkDropListDropped)="drop($event, colonne.id)"
-    >
       <div
-        class="ticket-card"
-        *ngFor="let ticket of colonne.tickets"
-        cdkDrag
+        class="column-body"
+        cdkDropList
+        [id]="colonne.id"
+        [cdkDropListData]="colonne.tickets"
+        [cdkDropListConnectedTo]="colonneIds"
+        (cdkDropListDropped)="drop($event, colonne.id)"
       >
-        <div class="ticket-header">
-          <span class="ticket-priorite">{{ prioriteLabel(ticket.priorite) }}</span>
-          <span class="ticket-type">{{ ticket.type }}</span>
+        <div
+          class="ticket-card"
+          *ngFor="let ticket of colonne.tickets"
+          cdkDrag
+        >
+          <div class="ticket-header">
+            <span class="ticket-priorite" [style.background]="prioriteCouleur(ticket.priorite)">
+              {{ ticket.priorite }}
+            </span>
+            <span class="ticket-type">{{ ticket.type }}</span>
+          </div>
+          <div class="ticket-titre">{{ ticket.titre }}</div>
+          <div class="ticket-meta">
+            <span>📍 {{ ticket.lieu }}</span>
+            <span>👤 {{ ticket.nom }}</span>
+          </div>
         </div>
-        <div class="ticket-titre">{{ ticket.titre }}</div>
-        <div class="ticket-lieu">📍 {{ ticket.lieu }}</div>
-        <div class="ticket-auteur">👤 {{ ticket.nom }}</div>
+
+        <div class="empty-column" *ngIf="colonne.tickets.length === 0">
+          Glisser un ticket ici
+        </div>
       </div>
 
-      <div class="empty-column" *ngIf="colonne.tickets.length === 0">
-        Glisser un ticket ici
-      </div>
     </div>
   </div>
 </div>

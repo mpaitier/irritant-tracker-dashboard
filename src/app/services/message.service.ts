@@ -5,7 +5,7 @@ import {
   addDoc, query, orderBy, doc
 } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
-import { environment } from '../../environements/environement';
+import { environment } from '../../environements/environements';
 import { Message } from '../models/message.model';
 
 const app = initializeApp(environment.firebase);

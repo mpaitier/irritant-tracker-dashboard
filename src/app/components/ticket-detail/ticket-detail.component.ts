@@ -58,7 +58,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy, OnChanges {
 
     this.subscription = this.messageService.getMessages(this.ticket.id).subscribe({
       next: messages => {
-        this.messages = messages;
+        this.messages = messages.sort(
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        );
         setTimeout(() => this.scrollerEnBas(), 50);
       },
       error: err => console.error('Erreur messages :', err)

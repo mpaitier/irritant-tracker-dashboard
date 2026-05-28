@@ -83,15 +83,19 @@ export class TicketDetailComponent implements OnInit, OnDestroy, OnChanges {
 
   async envoyerMessage(): Promise<void> {
     if (!this.nouveauMessage.trim() || !this.ticket.id) return;
-
     this.envoi = true;
+
+    const maintenant = new Date();
+    const dateLocale = new Date(maintenant.getTime() - maintenant.getTimezoneOffset() * 60000)
+      .toISOString()
+      .slice(0, -1);
 
     await this.messageService.envoyerMessage(this.ticket.id, {
       texte: this.nouveauMessage.trim(),
       auteur: 'Support',
       uidAuteur: 'admin',
       role: 'support',
-      date: new Date().toISOString(),
+      date: dateLocale,
     });
 
     this.nouveauMessage = '';
@@ -123,12 +127,17 @@ export class TicketDetailComponent implements OnInit, OnDestroy, OnChanges {
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     });
   }
 
   formaterHeure(dateStr: string): string {
     const date = new Date(dateStr);
-    return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString('fr-FR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    });
   }
 
   fermerPopup(): void {

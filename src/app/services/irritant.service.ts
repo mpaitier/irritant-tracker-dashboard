@@ -65,14 +65,20 @@ export class IrritantService {
   }
 
   // Envoie un message
-async envoyerMessage(irritantId: string, texte: string, auteur: string, uidAuteur: string): Promise<void> {
-  const ref = collection(db, 'irritants', irritantId, 'messages');
-  await addDoc(ref, {
-    texte,
-    auteur,
-    uidAuteur,
-    role: 'support',
-    date: new Date().toISOString(),
-  });
-}
+  async envoyerMessage(irritantId: string, texte: string, auteur: string, uidAuteur: string): Promise<void> {
+    const ref = collection(db, 'irritants', irritantId, 'messages');
+    
+    const maintenant = new Date();
+    const dateLocale = new Date(maintenant.getTime() - maintenant.getTimezoneOffset() * 60000)
+      .toISOString()
+      .slice(0, -1);
+
+    await addDoc(ref, {
+      texte,
+      auteur,
+      uidAuteur,
+      role: 'support',
+      date: dateLocale,
+    });
+  }
 }

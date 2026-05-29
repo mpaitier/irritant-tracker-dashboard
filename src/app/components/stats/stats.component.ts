@@ -98,7 +98,6 @@ export class StatsComponent implements OnInit, AfterViewInit, OnDestroy {
               font: { size: 10 },
               callback: function(value, index, ticks) {
                 const label = this.getLabelForValue(index);
-                // Tronque à 15 caractères
                 return label.length > 15 ? label.substring(0, 15) + '…' : label;
               }
             }

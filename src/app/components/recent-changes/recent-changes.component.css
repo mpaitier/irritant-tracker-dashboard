@@ -89,7 +89,7 @@
   margin-bottom: 8px;
 }
 
-/* Message */
+/* Partie des messages */
 .change-message {
   background: #f0ebff;
   border-left: 3px solid #673ab7;
@@ -124,7 +124,7 @@
   line-height: 1.4;
 }
 
-/* Reply */
+/* Partie de réponse */
 .change-reply {
   display: flex;
   gap: 6px;
@@ -161,7 +161,7 @@
   background: #5c35d4;
 }
 
-/* Empty */
+/* Partie quand c'est vide */
 .empty {
   text-align: center;
   color: #bbb;

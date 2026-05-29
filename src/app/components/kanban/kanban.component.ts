@@ -18,7 +18,7 @@ export class KanbanComponent implements OnInit {
     { id: 'Fini', label: 'Fini', couleur: '#66BB6A', tickets: [] as Irritant[] },
   ];
 
-  // Ticket sélectionné pour la popup
+  // Ticket sélectionné pour le popup
   ticketSelectionne: Irritant | null = null;
 
   get colonneIds(): string[] {
@@ -40,7 +40,7 @@ export class KanbanComponent implements OnInit {
       });
     });
   }
-
+  
   drop(event: CdkDragDrop<Irritant[]>, nouvelleColonne: string): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -59,6 +59,7 @@ export class KanbanComponent implements OnInit {
     }
   }
 
+  // Couleur en fonction de la priorité
   prioriteCouleur(priorite: string): string {
     const p = parseInt(priorite);
     if (p <= 3) return '#66BB6A';
@@ -66,17 +67,17 @@ export class KanbanComponent implements OnInit {
     return '#EF5350';
   }
 
-  // Ouvre la popup
+  // Ouvre le popup
   ouvrirTicket(ticket: Irritant): void {
     this.ticketSelectionne = ticket;
   }
 
-  // Ferme la popup
+  // Ferme le popup
   fermerTicket(): void {
     this.ticketSelectionne = null;
   }
 
-  // Met à jour le statut depuis la popup
+  // Met à jour le statut depuis le popup
   onStatutChange(ticket: Irritant, nouveauStatut: string): void {
     ticket.statut = nouveauStatut;
   }

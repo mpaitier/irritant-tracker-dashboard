@@ -103,7 +103,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy, OnChanges {
     setTimeout(() => this.scrollerEnBas(), 100);
   }
 
-  // Ouvre la photo dans un nouvel onglet
+  // Ouvre la photo
   ouvrirPhoto(url: string): void {
     window.open(url, '_blank');
   }

@@ -6,9 +6,9 @@ interface Section {
   titre: string;
   collection: string;
   items: ReferentielItem[];
-  nouveauNom: string;         // Champ pour ajouter un nouvel élément
-  itemEnEdition: string | null; // ID de l'item en cours d'édition
-  nomEdition: string;         // Valeur du champ d'édition
+  nouveauNom: string; 
+  itemEnEdition: string | null;
+  nomEdition: string;
   chargement: boolean;
 }
 
@@ -20,7 +20,7 @@ interface Section {
 export class ReferentielComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
-  // Popup de confirmation de suppression
+  // Confirmation de suppression
   popupSuppression: {
     visible: boolean;
     collection: string;
@@ -102,7 +102,7 @@ export class ReferentielComponent implements OnInit, OnDestroy {
     section.nomEdition = '';
   }
 
-  // Ouvre la popup de confirmation
+  // Ouvre le popup de confirmation
   demanderSuppression(collection: string, item: ReferentielItem): void {
     this.popupSuppression = {
       visible: true,

@@ -21,7 +21,7 @@
   overflow: hidden;
 }
 
-/* Header */
+/* Partie du header */
 .popup-header {
   display: flex;
   align-items: center;
@@ -110,7 +110,7 @@
   font-weight: 700;
 }
 
-/* Description */
+/* Partie de description */
 .section-description h4,
 .section-photos h4,
 .section-chat h4 {
@@ -127,7 +127,7 @@
   color: #616161;
 }
 
-/* Photos */
+/* Partie des photos */
 .grille-photos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -147,7 +147,7 @@
   opacity: 0.85;
 }
 
-/* Chat */
+/* Partie message */
 .section-chat {
   display: flex;
   flex-direction: column;

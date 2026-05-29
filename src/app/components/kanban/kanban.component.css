@@ -11,7 +11,7 @@
   padding-bottom: 8px;
 }
 
-/* Scrollbar stylée */
+/* Partie de la scrollbar */
 .kanban-board::-webkit-scrollbar {
   height: 6px;
 }
@@ -77,7 +77,7 @@
   border-radius: 10px;
 }
 
-/* Ticket */
+/* Partie des tickets */
 .ticket-card {
   background: #fff;
   border-radius: 8px;

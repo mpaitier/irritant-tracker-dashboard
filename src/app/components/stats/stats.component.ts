@@ -8,7 +8,7 @@ Chart.register(...registerables);
 
 const COULEURS_STATUT: Record<string, string> = {
   'Ouvert': '#9E9E9E', 'En attente': '#42A5F5', 'En cours': '#FFA726',
-  'Fini': '#66BB6A', 'Annulé': '#EF5350',
+  'Fini': '#66BB6A', 'Annulé': '#EF5350', 'Attente réponse': '#AB47BC'
 };
 
 @Component({
